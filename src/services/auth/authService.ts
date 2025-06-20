@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 export interface User {
     email: string;
@@ -14,5 +15,6 @@ export const signUp = async (user: User) => {
 
 export const signIn = async (user: User) => {
     const response = await axios.post(`${API_URL}/signin`, user);
+    Cookies.set('token', response.data, { expires: 1 });
     return response.data;
 }
